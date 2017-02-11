@@ -20,4 +20,4 @@ langtons_ant LRRRRRLLR 10000000
 ```
 output:
 ![output]
-(http://imgur.com/5xjaGmR)
+(http://i.imgur.com/5xjaGmR.png)
