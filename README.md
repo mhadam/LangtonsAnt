@@ -16,3 +16,8 @@ Interesting example
 ```
 langtons_ant LRRRRRLLR 10000000
 ```
+```
+```
+output:
+![output]
+(http://imgur.com/5xjaGmR)
