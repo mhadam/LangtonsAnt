@@ -29,4 +29,5 @@ let main argv =
         ignore (executeAnt 500 500 dirs iterations orientation (outputName argv.[0] argv.[1]))
         0
     else
+        printfn "%i arguments input, expected 3 arguments" argv.Length
         0 // return an integer exit code
