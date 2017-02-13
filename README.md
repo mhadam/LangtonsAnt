@@ -11,14 +11,11 @@ The executable takes two arguments:
 * a sequence of letters that specify what movement the ant should take (eg. RLR or LLRR to name a few)
 * a number of movements (the program seems to bog down around 10^9 movements)
 
-Interesting example
+Interesting examples
 -------------------
+Cardioid!
 ```
-langtons_ant LRRRRRLLR 10000000
+LangtonsAnt.exe RRLL 500000000 S
 ```
-```
-langtons_ant RRLLLRLLLLLL 4700000
-```
-output:
-![output]
-(http://i.imgur.com/5xjaGmR.png)
+[cardioid langton's ant]
+(http://i.imgur.com/Myad95a.png)
