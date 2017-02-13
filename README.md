@@ -10,6 +10,7 @@ The program outputs a PNG file.
 The executable takes two arguments:
 * a sequence of letters that specify what movement the ant should take (eg. RLR or LLRR to name a few)
 * a number of movements (the program seems to bog down around 10^9 movements)
+* a starting orientation for the ant (cardinal directions: N, S, E, W)
 
 Interesting examples
 -------------------
