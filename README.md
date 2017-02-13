@@ -17,5 +17,4 @@ Cardioid!
 ```
 LangtonsAnt.exe RRLL 500000000 S
 ```
-[cardioid langton's ant]
-(http://i.imgur.com/Myad95a.png)
+![cardioid langton's ant](http://i.imgur.com/Myad95a.png)
