@@ -16,7 +16,7 @@ Interesting examples
 -------------------
 A [cardioid](https://en.wikipedia.org/wiki/Cardioid)!
 
-I'd be super interested if there's any formal proof relating this to a Mandelbrot fractal or a _z_ -> _z_<sup>2</sup> complex mapping.
+I'd be super interested if there's any formal proof relating this to a Mandelbrot fractal or a _z_ -> _z_<sup>_2_</sup> complex mapping.
 
 Worth exploring: whether LLRR is a [nephroid](https://en.wikipedia.org/wiki/Nephroid).
 ```
