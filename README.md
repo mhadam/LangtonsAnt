@@ -16,3 +16,9 @@ Interesting example
 ```
 langtons_ant LRRRRRLLR 10000000
 ```
+```
+langtons_ant RRLLLRLLLLLL 4700000
+```
+output:
+![output]
+(http://i.imgur.com/5xjaGmR.png)
