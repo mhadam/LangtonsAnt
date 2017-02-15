@@ -23,3 +23,9 @@ Worth exploring: whether RRLL is a [nephroid](https://en.wikipedia.org/wiki/Neph
 LangtonsAnt.exe RRLL 500000000 S
 ```
 ![cardioid langton's ant](http://i.imgur.com/Myad95a.png)
+
+This one looks cool, I was exploring LR sequences and tried making one with increasing Rs: L-R-L-2R-L-3R-L-4R
+```
+LangtonsAnt.exe LRLRRLRRRLRRRR 100000000 N
+```
+![increasing R sequence langton's ant](http://i.imgur.com/pVI5Ewd.png)
