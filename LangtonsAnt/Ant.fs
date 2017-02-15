@@ -74,8 +74,10 @@ let saveAs (name : string) (bitmap : Bitmap) =
     bitmap.Save(path)
 
 let outputBitmap ant =
+    let { dimensions = dimensions } = ant
+    let (xSize, ySize) = dimensions
     let outputBitmap =
-        new Bitmap(1000, 1000)
+        new Bitmap(xSize, ySize)
 
     let getColor index =
         Seq.item index ant.colors
