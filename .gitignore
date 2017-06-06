@@ -241,3 +241,5 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /LangtonsAnt/langton.png
+/outputFiles
+/outputFiles/LLRR_50000000.png

@@ -5,7 +5,24 @@ open System.IO
 open System
 open ColorMine.ColorSpaces
 
-let makeColorPalette (dirs : float []) =
+type turn =
+    | Left
+    | Right
+
+type vector =
+    | North
+    | South
+    | East
+    | West
+
+type ant = {
+    dimensions : int*int
+    position: int*int
+    colors: seq<Color>
+    vector: vector
+    grid: int[,] }
+
+let makeColorPalette (turns : turn option []) =
     let goldenRatio = (1.0 + sqrt(5.0)) / 2.0
 
     let random = Random()
@@ -22,7 +39,7 @@ let makeColorPalette (dirs : float []) =
         Hsv(H = next * 360.0, S = s, V = v)
 
     let hsvColors =
-        seq { yield initialColor; yield! (Seq.unfold (fun acc -> Some(generateColor acc, generateColor acc)) initialColor |> Seq.take dirs.Length) }
+        seq { yield initialColor; yield! (Seq.unfold (fun acc -> Some(generateColor acc, generateColor acc)) initialColor |> Seq.take turns.Length) }
     
     let getRGBColor (hsv : Hsv) =
         let rgb = hsv.To<Rgb>()
@@ -30,23 +47,15 @@ let makeColorPalette (dirs : float []) =
 
     Seq.map getRGBColor hsvColors
 
-type ant = {
-    dimensions : int*int
-    position: int*int
-    colors: seq<Color>
-    vector: float
-    grid: int[,] }
-
 let moveAnt ant =
-    //printfn "%A" (ant.vector, ant.position)
     let (x, y) = ant.position
     let (xLength, yLength) = (Array2D.length1 ant.grid, Array2D.length2 ant.grid)
     let firstMove = 
         match ant with
-        | { vector = 0.0 } when x < xLength-1 -> { ant with position = (x + 1, y) }
-        | { vector = 90.0 } when y < yLength-1-> { ant with position = (x, y + 1)}
-        | { vector = 180.0 } when x > 0 -> { ant with position = (x - 1, y)}
-        | { vector = 270.0 } when y > 0 -> { ant with position = (x, y - 1)}
+        | { vector = East } when x < xLength-1 -> { ant with position = (x + 1, y) }
+        | { vector = North } when y < yLength-1-> { ant with position = (x, y + 1)}
+        | { vector = West } when x > 0 -> { ant with position = (x - 1, y)}
+        | { vector = South } when y > 0 -> { ant with position = (x, y - 1)}
         | _ -> ant
     
     let (x1, y1) = firstMove.position
@@ -60,13 +69,22 @@ let moveAnt ant =
     | _, -1 -> { firstMove with position = (x1, yLength-1) }
     | _, _ -> firstMove
 
-let addAngle ant angle =
-    let curAngle = ant.vector
-    let newVector = 
-        match (curAngle + angle) % 360.0 with
-        | x when x < 0.0 -> (curAngle + angle) % 360.0 + 360.0
-        | _ -> (curAngle + angle) % 360.0
-    
+let updateVector ant (turn : turn option) =
+    let initialVector = ant.vector
+    let newVector =
+        match turn with
+        | Some turn ->
+            match (turn, initialVector) with
+            | (Left, East) -> North
+            | (Left, North) -> West
+            | (Left, West) -> South
+            | (Left, South) -> East
+            | (Right, East) -> South
+            | (Right, North) -> East
+            | (Right, West) -> North
+            | (Right, South) -> West
+        | None -> initialVector
+
     { ant with vector = newVector }
 
 let saveAs (name : string) (bitmap : Bitmap) =
@@ -90,7 +108,7 @@ let outputBitmap ant =
     outputBitmap
 
 
-let executeAnt xSize ySize (directions : float []) iterations orientation outputName =
+let executeAnt xSize ySize (directions : turn option []) iterations orientation outputName =
     let initialAnt = {
         dimensions = (xSize, ySize)
         position = (xSize / 2 - 1, ySize / 2 - 1)
@@ -102,7 +120,7 @@ let executeAnt xSize ySize (directions : float []) iterations orientation output
         let { position = position } = ant
         let (x, y) = position
         let color = Array2D.get ant.grid x y
-        let turnedAnt = addAngle ant directions.[color]
+        let turnedAnt = updateVector ant directions.[color]
 
         if color >= directions.Length-1 then
             Array2D.set ant.grid x y 0
