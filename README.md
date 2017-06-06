@@ -15,8 +15,7 @@ The executable takes two arguments:
 Interesting examples
 -------------------
 A [cardioid](https://en.wikipedia.org/wiki/Cardioid)!
-
-I'd be super interested if there's any formal proof relating this to a Mandelbrot fractal or a _z_ -> _z_<sup>2</sup> complex mapping.
+I'd be super interested if there's any formal proof relating this to a Mandelbrot fractal .
 
 Worth exploring: whether RRLL is a [nephroid](https://en.wikipedia.org/wiki/Nephroid).
 ```
